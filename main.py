@@ -1,3 +1,4 @@
+import base64
 import tkinter as tk
 import webbrowser
 from tkinter import messagebox as mb
@@ -58,7 +59,36 @@ def show_about():
 
 if __name__ == '__main__':
     win = tk.Tk()
-    win.iconbitmap("epdl.ico")
+    icon = \
+        """AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAD0//8B9P//AfT//wH0//8BPWAdT4GUAKmRpADLlKYA2ZSmANuUpQDPipoAsXuMAGP0//8B
+9P//AfT//wH0//8B9P//AfT//wH0//8BztUATazGAP/d9wD/7P8A/+3/AP/t/wD/6/8A/+H8AP+/
+2AD/prgAbfT//wH0//8B9P//AfT//wH0//8B9P//AazOALvj/gD/3/wA/5OpAP/+/wD///8A/5es
+AP/b9gD/8v8A/7nOAN07Wx8F9P//AfT//wH0//8BM29THwA+CLGKrAD96v8A/9n2AP99kwD///8A
+////AP9/lgD/zOkA//b/AP+bswD/AD0TwwBBFTH0//8BAGAAIQBjAN0AWQD/AF0A/3meAP+0xgD/
+tsEA/9DjAP/Q5QD/sb0A/7DBAP+KpQD/FF4A/wBQAP8AXADvAEINNwB3AJcAdwD/AHgA/wBvAP8A
+ZAD/AGkA/yN1AP86ewD/PHoA/yZxAP8FYgD/AFYA/wBgAP8AbAD/AG8A/wBuALOl1ADVYLoA/wCQ
+AP8AkgD/AI8A/wCIAP8AgQD/AHwA/wB5AP8AdgD/AHcA/wB8AP8AfgD/AHwA/zWYAP+hyADh//8A
+7y65AP8AoAD/AKMA/wCiAP8ArwD/JbsA/wCeAP8AmAD/AKUA/wSmAP8AkAD/AI4A/wCMAP8AmAD/
+9fgA7f//AN8YvwD/AKoA/wCtAP8AqQD/NcwA////AP/R/wD/s/YA////AP+C3gD/AJ0A/wCdAP8A
+mgD/AKIA//L/AOfm/wCxYtwA/wCtAP8AsQD/AK0A/wPIAP///wD///8A////AP///wD/UdQA/wCm
+AP8ApwD/AKIA/yi6AP/0/wDLG74AWQC3AP8AsAD/ALAA/wC7AP/C/wD///8A////AP///wD///8A
+/+H/AP8AuwD/AKwA/wCqAP8ArQD/DLUAgwC2HQkArwDTALEA/wCyAP+L9wD///8A////AP///wD/
+//8A////AP///wD/tP8A/wCxAP8ArwD/AK4A7wC2ABv0//8BALgAPwC0AP8AsgD/ALwA/xjMAP+c
+/QD///8A////AP/D/wD/PNYA/wDAAP8AsgD/ALEA/wC5AF/0//8B9P//AfT//wEArQB1ALQA/wCy
+AP8AsAD/ALUA/9//AP///wD/ALoA/wCvAP8AsgD/ALQA/wCrAJP0//8B9P//AfT//wH0//8B9P//
+AQC0AFUAtADjALQA/wCxAP8AxAD/AMgA/wCxAP8AswD/ALMA7QCyAGn0//8B9P//AfT//wH0//8B
+9P//AfT//wH0//8BAKYAFwCzAG0AtACzALIA1QCyANkAtAC7ALgAfQCuAB/0//8B9P//AfT//wH0
+//8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAA=="""
+    icondata = base64.b64decode(icon)
+    ## The temp file is icon.ico
+    tempFile = "icon.ico"
+    iconfile = open(tempFile, "wb")
+    ## Extract the icon
+    iconfile.write(icondata)
+    iconfile.close()
+    win.iconbitmap("icon.ico")
     win.title('EmuParadiseDL')
     win.geometry(f"{WIN_WIDTH}x{WIN_HEIGHT}")
     win.minsize(width=WIN_WIDTH, height=WIN_HEIGHT)
