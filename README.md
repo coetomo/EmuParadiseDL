@@ -11,3 +11,7 @@ EmuParadise Downloader Tool
 - Allows to search titles from the app itself
 - Add a guide or Help page in the app menu
 - Add a menu to check for updates
+
+
+## Disclaimer
+This is meant to be a fun side-project so no gurantees it would be maintained in the future. This project is meant to be used for **educational purposes only** so if you're going to use the tool, please be aware of what you're getting into and use it resposibly!
