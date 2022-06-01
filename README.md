@@ -7,6 +7,7 @@ EmuParadise Downloader Tool
 - Shows the copyable link so that you can manually download it using other tools
 
 ## To-Do List
+- A lot of code cleanup (abstractions and modularize most components)
 - Add built-in Downloader Manager
 - Allows to search titles from the app itself
 - Add a guide or Help page in the app menu
