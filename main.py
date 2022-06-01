@@ -5,17 +5,21 @@ from tkinter import messagebox as mb
 
 import requests
 
-VERSION = "1.00"
+VERSION = "1.0.1"
 WIN_WIDTH, WIN_HEIGHT = 290, 255
 
 
 def get_download_url(from_url):
     pageid = from_url.rsplit('/', 1)[-1]
+    # pageid => 'id-download'
+    if '-' in pageid:
+        pageid = pageid.split('-', 1)[0]
+
     request_url = f"https://www.emuparadise.me/roms/get-download.php?gid={pageid}&test=true"
 
     response = requests.get(request_url, headers={"Referer": from_url}, allow_redirects=False)
-    dl_link = response.headers['Location']
-    return dl_link
+    dl_link = response.headers.get('Location', None)
+    return dl_link if dl_link else None
     len_link = len(dl_link)
     print("=" * (len_link + 4))
     print(f"| {dl_link} |");
@@ -36,6 +40,10 @@ def auto_download_browser(entry):
         return
 
     dlurl = get_download_url(url)
+    if dlurl is None:
+        mb.showerror(title="Error",
+                     message="Invalid URL! Please ensure that it is a URL for the game page!")
+        return
     webbrowser.open(dlurl)
 
 
@@ -46,6 +54,10 @@ def show_download_link(entry, text):
                      message="URL field is empty. PLease enter the URL page before pressing the button!")
         return
     dlurl = get_download_url(url)
+    if dlurl is None:
+        mb.showerror(title="Error",
+                     message="Invalid URL! Please ensure that it is a URL for the game page!")
+        return
     text.configure(state='normal')
     text.delete('1.0', tk.END)
     text.insert('end', dlurl)
@@ -54,7 +66,7 @@ def show_download_link(entry, text):
 
 def show_about():
     mb.showinfo(title="About",
-                message=f"EmuParadiseDL v{VERSION}\nAuthor: Chris Oetomo\n(more features coming soon)")
+                message=f"EmuParadiseDL v{VERSION}\nAuthor: Chris Oetomo (coetomo @ GitHub)\nMore features coming soon!")
 
 
 if __name__ == '__main__':
@@ -82,10 +94,8 @@ AQC0AFUAtADjALQA/wCxAP8AxAD/AMgA/wCxAP8AswD/ALMA7QCyAGn0//8B9P//AfT//wH0//8B
 //8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAA=="""
     icondata = base64.b64decode(icon)
-    ## The temp file is icon.ico
     tempFile = "icon.ico"
     iconfile = open(tempFile, "wb")
-    ## Extract the icon
     iconfile.write(icondata)
     iconfile.close()
     win.iconbitmap("icon.ico")
